@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.hazelcast.com/schema/spring http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd">
+	    	
+	
+  	<hz:hazelcast id="hazelCastNode">
+  		<hz:config>
+			<hz:group password="S3CR3T" name="GROUP_1" />
+  			<hz:management-center enabled="true" url="http://10.248.235.138:8505/mancenter-3.4.1"/>
+  			<hz:network port="5000" public-address="0.0.0.0"  port-auto-increment="true">
+  			
+  				<hz:join>
+  					<hz:multicast enabled="false" multicast-group="224.2.2.3" multicast-port="54327" multicast-time-to-live="3" multicast-timeout-seconds="2"/> 						
+  					<hz:tcp-ip enabled="true">
+  						<hz:member>0.0.0.0:5000</hz:member>
+  						<hz:member>0.0.0.0:5001</hz:member>
+  						<hz:member>0.0.0.0:5002</hz:member>
+  						<hz:member>0.0.0.0:5003</hz:member>
+  					</hz:tcp-ip>
+  					
+  				</hz:join>
+  				
+  			</hz:network>
+  			
+  			<hz:executor-service name="default" pool-size="5" queue-capacity="1000"/>
+  			<hz:topic name="Chat">
+  				<hz:statistics-enabled>true</hz:statistics-enabled>
+  				<hz:global-ordering-enabled>true</hz:global-ordering-enabled>
+  			</hz:topic>
+  				
+  		</hz:config>
+  	</hz:hazelcast>
+  	
+</beans>

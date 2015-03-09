@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.hazelcast.com/schema/spring http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd">
+	    	
+	
+	<hz:client id="${NAME}">
+		<hz:group password="S3CR3T" name="GROUP_1"/>
+		<hz:network connection-attempt-limit="999999999" redo-operation="true" >
+			<hz:member>localhost:5000</hz:member>
+			<hz:member>localhost:5001</hz:member>
+			<hz:member>localhost:5002</hz:member>
+			<hz:member>localhost:5003</hz:member>
+		</hz:network>
+	</hz:client>
+ 		
+
+</beans>
