@@ -1,4 +1,4 @@
-package de.vet.chat;
+package de.vet.chat.client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -40,6 +40,12 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IList;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.MessageListener;
+
+import de.vet.chat.skif.LogoffUserNotification;
+import de.vet.chat.skif.MessageNotification;
+import de.vet.chat.skif.NewChatNotification;
+import de.vet.chat.skif.NewUserNotification;
+import de.vet.chat.skif.Notification;
 
 public class ChatClient extends JDialog implements MessageListener<Notification> {
 
@@ -110,7 +116,7 @@ public class ChatClient extends JDialog implements MessageListener<Notification>
     }
 
     private void initGUI() {
-        setTitle("VET Chat (" + userName + ")");
+        setTitle("Hazelcast Chat (" + userName + ")");
         setSize(500, 600);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());

@@ -1,4 +1,4 @@
-package de.vet.chat;
+package de.vet.chat.server;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.GenericApplicationContext;
@@ -8,6 +8,10 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
+
+import de.vet.chat.skif.LogoffUserNotification;
+import de.vet.chat.skif.NewUserNotification;
+import de.vet.chat.skif.Notification;
 
 public class ChatServer {
 
@@ -25,7 +29,7 @@ public class ChatServer {
         hazelcastInstance = applicationContext.getBean(HazelcastInstance.class);
         userList = hazelcastInstance.getList("USERLIST");
         if (userList.isEmpty()){
-            System.out.println("List is empty");
+            System.out.println("Userlist is empty");
         }
         for (String string : userList) {
             System.out.println("Known user:" +string);

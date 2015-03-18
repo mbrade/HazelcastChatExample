@@ -1,4 +1,4 @@
-package de.vet.chat;
+package de.vet.chat.skif;
 
 public class MessageNotification extends Notification {
 
