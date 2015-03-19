@@ -8,7 +8,6 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
-import com.hazelcast.mapreduce.KeyValueSource;
 
 import de.vet.chat.skif.LogoffUserNotification;
 import de.vet.chat.skif.NewUserNotification;
