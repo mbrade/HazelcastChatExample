@@ -8,9 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.swing.DefaultListModel;
@@ -40,6 +42,8 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IList;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.MessageListener;
+import com.hazelcast.mapreduce.KeyValueSource;
+import com.hazelcast.spi.NodeEngine;
 
 import de.vet.chat.skif.LogoffUserNotification;
 import de.vet.chat.skif.MessageNotification;
@@ -107,9 +111,9 @@ public class ChatClient extends JDialog implements MessageListener<Notification>
         props.put("NAME", userName);
         propertyPlaceholderConfigurer.setProperties(props);
         applicationContext.addBeanFactoryPostProcessor(propertyPlaceholderConfigurer);
-        XmlBeanDefinitionReader springReader = new XmlBeanDefinitionReader(applicationContext);
-        springReader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_XSD);
-        springReader.loadBeanDefinitions("classpath:client-context.xml");
+        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(applicationContext);
+        beanDefinitionReader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_XSD);
+        beanDefinitionReader.loadBeanDefinitions("classpath:client-context.xml");
         applicationContext.refresh();
         hazelcastInstance = applicationContext.getBean(HazelcastInstance.class);
         chatTopic = hazelcastInstance.getTopic("Chat");

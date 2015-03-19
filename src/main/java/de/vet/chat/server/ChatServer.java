@@ -8,6 +8,7 @@ import com.hazelcast.core.IList;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
+import com.hazelcast.mapreduce.KeyValueSource;
 
 import de.vet.chat.skif.LogoffUserNotification;
 import de.vet.chat.skif.NewUserNotification;
@@ -22,9 +23,9 @@ public class ChatServer {
     public static void main(final String[] args) {
         GenericApplicationContext applicationContext = new GenericApplicationContext();
         applicationContext.registerShutdownHook();
-        XmlBeanDefinitionReader jettyReader = new XmlBeanDefinitionReader(applicationContext);
-        jettyReader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_XSD);
-        jettyReader.loadBeanDefinitions("classpath:application-context.xml");
+        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(applicationContext);
+        beanDefinitionReader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_XSD);
+        beanDefinitionReader.loadBeanDefinitions("classpath:application-context.xml");
         applicationContext.refresh();
         hazelcastInstance = applicationContext.getBean(HazelcastInstance.class);
         userList = hazelcastInstance.getList("USERLIST");
